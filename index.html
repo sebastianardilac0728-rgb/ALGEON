@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080812">
+  <title>ALGEON | Domina el álgebra</title>
+  <meta name="description" content="Aprende álgebra con ALGEON, ejercicios interactivos y desafíos matemáticos.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="#inicio" class="logo">ALGEON<span>.</span></a>
+
+    <nav aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#aprender">Aprender</a>
+      <a href="#ejercicios">Ejercicios</a>
+      <a href="#progreso">Mi progreso</a>
+    </nav>
+
+    <a href="#ejercicios" class="nav-button">Empezar</a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <p class="eyebrow">EL FUTURO DE LAS MATEMÁTICAS</p>
+
+        <h1>El álgebra tiene<br>
+          <span>una nueva dimensión.</span>
+        </h1>
+
+        <p class="hero-description">
+          Aprende, resuelve y demuestra lo que sabes.
+          Convierte los problemas matemáticos en nuevos logros.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#ejercicios" class="button-primary">Explorar ejercicios ↗</a>
+          <a href="#aprender" class="button-secondary">Descubrir ALGEON</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <strong>01</strong>
+            <span>Aprende</span>
+          </div>
+          <div>
+            <strong>02</strong>
+            <span>Practica</span>
+          </div>
+          <div>
+            <strong>03</strong>
+            <span>Progresa</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Ilustración matemática">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="math-core">
+          <span class="math-symbol symbol-one">+</span>
+          <span class="math-symbol symbol-two">x²</span>
+          <span class="math-symbol symbol-three">÷</span>
+          <span class="math-symbol symbol-four">=</span>
+          <div class="core-letter">x</div>
+        </div>
+        <div class="floating-label label-top">x + y = ?</div>
+        <div class="floating-label label-bottom">SYSTEM ONLINE</div>
+      </div>
+    </section>
+
+    <section class="section" id="aprender">
+      <div class="section-heading">
+        <p class="eyebrow">TU NUEVO COMIENZO</p>
+        <h2>Aprende a tu manera<span>.</span></h2>
+        <p>Construye tus conocimientos paso a paso.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">⌘</div>
+          <h3>Comprende</h3>
+          <p>Descubre cómo funcionan las ecuaciones y qué representan sus incógnitas.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">⟡</div>
+          <h3>Practica</h3>
+          <p>Resuelve ejercicios y comprueba tus respuestas para aprender de tus errores.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">↗</div>
+          <h3>Avanza</h3>
+          <p>Completa desafíos y observa cómo aumenta tu progreso.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section exercises-section" id="ejercicios">
+      <div class="section-heading">
+        <p class="eyebrow">CENTRO DE ENTRENAMIENTO</p>
+        <h2>Selecciona tu desafío<span>.</span></h2>
+        <p>Resuelve cada ecuación y encuentra el valor de x.</p>
+      </div>
+
+      <div class="exercise-grid">
+        <article class="exercise-card">
+          <div class="card-top">
+            <span class="level-badge">NIVEL 01</span>
+            <span class="card-number">01 / 03</span>
+          </div>
+          <h3>Ecuación básica</h3>
+          <p>Encuentra el valor desconocido.</p>
+          <div class="equation">3x + 6 = 21</div>
+          <button class="btn-resolver"
+            data-pregunta="Desafío 1"
+            data-enunciado="Resuelve: 3x + 6 = 21. ¿Cuánto vale x?"
+            data-respuesta="5"
+            data-pista="Resta 6 a ambos lados y después divide entre 3.">
+            Resolver <span>↗</span>
+          </button>
+        </article>
+
+        <article class="exercise-card">
+          <div class="card-top">
+            <span class="level-badge purple">NIVEL 02</span>
+            <span class="card-number">02 / 03</span>
+          </div>
+          <h3>Multiplicación</h3>
+          <p>Despeja la incógnita.</p>
+          <div class="equation">2x = 18</div>
+          <button class="btn-resolver"
+            data-pregunta="Desafío 2"
+            data-enunciado="Resuelve: 2x = 18. ¿Cuánto vale x?"
+            data-respuesta="9"
+            data-pista="Divide ambos lados de la ecuación entre 2.">
+            Resolver <span>↗</span>
+          </button>
+        </article>
+
+        <article class="exercise-card">
+          <div class="card-top">
+            <span class="level-badge pink">NIVEL 03</span>
+            <span class="card-number">03 / 03</span>
+          </div>
+          <h3>Despeje avanzado</h3>
+          <p>Encuentra el número que falta.</p>
+          <div class="equation">x − 7 = 12</div>
+          <button class="btn-resolver"
+            data-pregunta="Desafío 3"
+            data-enunciado="Resuelve: x − 7 = 12. ¿Cuánto vale x?"
+            data-respuesta="19"
+            data-pista="Suma 7 a ambos lados de la ecuación.">
+            Resolver <span>↗</span>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section class="section progress-section" id="progreso">
+      <div class="progress-panel">
+        <div class="progress-heading">
+          <div>
+            <p class="eyebrow">TU RENDIMIENTO</p>
+            <h2>Tu progreso<span>.</span></h2>
+          </div>
+          <div class="progress-number" id="textoProgreso">0%</div>
+        </div>
+
+        <p id="textoPuntuacion" aria-live="polite">
+          Has completado 0 de 3 ejercicios.
+        </p>
+
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Progreso de ejercicios"
+          aria-valuemin="0"
+          aria-valuemax="3"
+          aria-valuenow="0"
+          id="barraProgreso">
+          <div class="progress-fill" id="progresoRelleno"></div>
+        </div>
+
+        <p class="progress-note">
+          Sigue practicando. Cada desafío es una oportunidad para aprender.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="#inicio" class="logo">ALGEON<span>.</span></a>
+    <p>Explora las matemáticas. Construye tu futuro.</p>
+    <span>© 2026 ALGEON</span>
+  </footer>
+
+  <!-- Ventana emergente de ejercicios -->
+  <div
+    class="modal-overlay"
+    id="modalEjercicio"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitulo">
+
+    <div class="modal-box">
+      <button
+        class="modal-close"
+        id="cerrarModal"
+        type="button"
+        aria-label="Cerrar ventana">×</button>
+
+      <p class="eyebrow" id="modalPregunta">DESAFÍO</p>
+      <h2 id="modalTitulo">Resuelve la ecuación<span>.</span></h2>
+      <p id="modalEnunciado">Escribe tu respuesta para continuar.</p>
+
+      <form id="formularioRespuesta">
+        <label for="respuestaUsuario">Tu respuesta para x</label>
+        <input
+          id="respuestaUsuario"
+          name="respuestaUsuario"
+          type="number"
+          step="any"
+          placeholder="Escribe un número"
+          required
+          autocomplete="off">
+
+        <button class="button-primary check-button" type="submit">
+          Comprobar respuesta
+        </button>
+      </form>
+
+      <div id="resultadoRespuesta" class="answer-feedback" aria-live="polite"></div>
+
+      <button
+        id="intentarDeNuevo"
+        class="button-secondary retry-button"
+        type="button"
+        hidden>
+        Intentar de nuevo
+      </button>
+
+      <button
+        id="cerrarResultado"
+        class="button-secondary close-result-button"
+        type="button">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</body>
+</html>

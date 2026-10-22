@@ -1,2 +1,0 @@
-# ALGEON
-Pagina Sobre Algebra
