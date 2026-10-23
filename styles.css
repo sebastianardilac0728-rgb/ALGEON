@@ -1164,81 +1164,62 @@ input:focus-visible {
    ALGEON — EXPLICACIÓN DEL ÁLGEBRA
    ========================================== */
 
+
+/* Cuadro de explicación estilo tarjeta ALGEON */
+
 .explicacion-algebra {
-    width: min(100% - 40px, 850px);
-    margin: 45px auto 55px;
-    padding: 35px 40px;
+    width: 100%;
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 30px;
     box-sizing: border-box;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(0, 234, 255, 0.055),
-            rgba(138, 43, 226, 0.09)
-        );
+    background: #0d0d1b;
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    border-radius: 22px;
 
-    border: 1px solid rgba(0, 234, 255, 0.24);
-    border-radius: 20px;
-
-    box-shadow:
-        0 0 25px rgba(0, 234, 255, 0.055),
-        inset 0 0 25px rgba(138, 43, 226, 0.035);
-
-    color: #d8d8e8;
+    color: #aeb9d3;
     font-size: 1rem;
-    line-height: 1.85;
-    overflow-wrap: anywhere;
+    line-height: 1.7;
+
+    box-shadow: 0 0 18px rgba(138, 43, 226, 0.04);
 }
 
 .explicacion-algebra h2 {
-    margin: 0 0 22px;
-    color: #00eaff;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    line-height: 1.3;
-    letter-spacing: -0.5px;
-    text-align: left;
+    color: #f0efff;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 0 0 20px;
 }
 
 .explicacion-algebra h3 {
-    margin: 32px 0 18px;
-    padding-bottom: 10px;
-
-    color: #c69aff;
-    font-size: 1.25rem;
-    line-height: 1.4;
-
-    border-bottom: 1px solid rgba(138, 43, 226, 0.35);
+    color: #f0efff;
+    font-size: 1.2rem;
+    margin: 28px 0 14px;
 }
 
 .explicacion-algebra p {
-    margin: 0 0 15px;
-    color: #d8d8e8;
+    color: #aeb9d3;
+    margin: 0 0 13px;
     text-align: left;
 }
 
 .explicacion-algebra strong {
     color: #00eaff;
-    font-weight: 700;
+    font-weight: 600;
 }
 
-/* Resalta las operaciones matemáticas */
+@media (max-width: 600px) {
+    .explicacion-algebra {
+        padding: 23px 20px;
+        border-radius: 19px;
+    }
 
-.explicacion-algebra p:has(strong) {
-    padding: 12px 15px;
-    background: rgba(8, 8, 18, 0.45);
-    border-left: 3px solid #8a2be2;
-    border-radius: 5px 10px 10px 5px;
+    .explicacion-algebra h2 {
+        font-size: 1.3rem;
+    }
 }
 
-/* Separa visualmente el resultado final */
-
-.explicacion-algebra p:last-child {
-    margin-top: 25px;
-    margin-bottom: 0;
-    padding: 18px;
-    background: rgba(0, 234, 255, 0.055);
-    border: 1px solid rgba(0, 234, 255, 0.22);
-    border-radius: 12px;
 }
 
 /* ==========================================
