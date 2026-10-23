@@ -1357,3 +1357,36 @@ input:focus-visible {
   object-fit: contain;
   flex: 0 0 48px;
 }
+
+/* PUNTAJE XP AL LADO DEL LOGO AGN */
+.puntaje-algeon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: 1px solid rgba(0, 234, 255, 0.45);
+  border-radius: 12px;
+  background: rgba(0, 234, 255, 0.08);
+  color: #00eaff;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.1);
+}
+
+.puntaje-icono {
+  color: #b68cff;
+  font-size: 19px;
+}
+
+#puntajeXP {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .puntaje-algeon {
+    padding: 7px 9px;
+    font-size: 13px;
+    gap: 4px;
+  }
+}
