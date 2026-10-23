@@ -2,6 +2,7 @@
 /* =========================================
    ALGEON — 30 EJERCICIOS
    6 VISIBLES + ORDEN ALEATORIO + REINICIAR
+   SISTEMA XP PERSISTENTE
    ========================================= */
 
 const EJERCICIOS_ALGEON = [
@@ -42,6 +43,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const total = EJERCICIOS_ALGEON.length;
   const obtener = id => document.getElementById(id);
 
+  // =========================================
+  // SISTEMA XP: GUARDA EL PUNTAJE EN EL NAVEGADOR
+  // =========================================
+  const PUNTOS_CORRECTO = 10;
+  const PUNTOS_INCORRECTO = -5;
+  const elementoXP = obtener("puntajeXP");
+
+  let puntajeXP = Number(localStorage.getItem("algeonXP") ?? 0);
+
+  if (!Number.isFinite(puntajeXP)) {
+    puntajeXP = 0;
+  }
+
+  function actualizarXP() {
+    if (elementoXP) {
+      elementoXP.textContent = `${puntajeXP} XP`;
+    }
+
+    localStorage.setItem("algeonXP", String(puntajeXP));
+  }
+
+  function sumarXP(puntos) {
+    puntajeXP += puntos;
+    actualizarXP();
+  }
+
+  actualizarXP();
+
   const contenedor = obtener("exerciseGrid");
 
   if (!contenedor) {
@@ -49,8 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Elementos del modal: se comprueban por separado para que
-  // su ausencia no impida cargar las tarjetas.
+  // Elementos del modal.
   const modal = obtener("modalEjercicio");
   const cerrarModal = obtener("cerrarModal");
   const cerrarResultado = obtener("cerrarResultado");
@@ -73,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let tarjetaPendiente = null;
   const completados = new Set();
 
-  // Mezcla todos los ejercicios sin agruparlos por nivel.
   function mezclarEjercicios() {
     const copia = [...EJERCICIOS_ALGEON];
 
@@ -85,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return copia;
   }
 
-  // Tarjeta sin etiquetas de nivel.
   function crearTarjeta(ejercicio, indice) {
     const tarjeta = document.createElement("article");
     tarjeta.className = "exercise-card";
@@ -231,15 +257,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const correcta = Number(actual.dataset.respuesta);
 
       if (texto === "" || !Number.isFinite(respuestaUsuario)) {
-        mostrarResultado("Escribe una respuesta válida antes de comprobar.", "incorrect");
+        mostrarResultado(
+          "Escribe una respuesta válida antes de comprobar.",
+          "incorrect"
+        );
         return;
       }
 
       if (Math.abs(respuestaUsuario - correcta) < 0.000001) {
+        // RESPUESTA CORRECTA: SUMA 10 XP
+        sumarXP(PUNTOS_CORRECTO);
+
         completados.add(actual);
         tarjetaPendiente = actual;
 
-        mostrarResultado("¡Correcto! 🎉 Has resuelto la ecuación.", "correct");
+        mostrarResultado(
+          "¡Correcto! 🎉 Has resuelto la ecuación. +10 XP",
+          "correct"
+        );
 
         entrada.disabled = true;
         formulario.hidden = true;
@@ -252,7 +287,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         actualizarProgreso();
       } else {
-        mostrarResultado(`Todavía no es correcto. 💡 Pista: ${actual.dataset.pista}`, "incorrect");
+        // RESPUESTA INCORRECTA: RESTA 5 XP POR CADA INTENTO
+        sumarXP(PUNTOS_INCORRECTO);
+
+        mostrarResultado(
+          `Incorrecto. −5 XP. 💡 Pista: ${actual.dataset.pista}`,
+          "incorrect"
+        );
+
         if (botonReintentar) botonReintentar.hidden = false;
         if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
       }
@@ -263,10 +305,12 @@ document.addEventListener("DOMContentLoaded", () => {
     botonReintentar.addEventListener("click", () => {
       entrada.value = "";
       entrada.disabled = false;
+
       if (resultado) {
         resultado.textContent = "";
         resultado.className = "answer-feedback";
       }
+
       botonReintentar.hidden = true;
       entrada.focus();
     });
@@ -287,9 +331,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Función global utilizada por el botón Reiniciar del HTML.
+  // Reiniciar ejercicios SIN borrar el puntaje XP.
   window.reiniciarALGEON = function () {
-    if (!confirm("¿Reiniciar ALGEON? Tu progreso volverá a cero y los ejercicios cambiarán de orden.")) {
+    if (!confirm(
+      "¿Reiniciar ALGEON? Tu progreso volverá a cero y los ejercicios cambiarán de orden. Tus XP se conservarán."
+    )) {
       return;
     }
 
@@ -306,6 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lista = mezclarEjercicios();
     cargarIniciales();
     actualizarProgreso();
+    actualizarXP();
 
     const seccion = obtener("ejercicios");
     if (seccion) {
@@ -313,10 +360,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Cargar los primeros seis ejercicios al abrir la página.
+  // Cargar los primeros seis ejercicios.
   lista = mezclarEjercicios();
   cargarIniciales();
   actualizarProgreso();
 
-  console.log("ALGEON listo: 30 ejercicios mezclados y 6 visibles.");
+  console.log("ALGEON listo: 30 ejercicios, 6 visibles y sistema XP activo.");
 });
