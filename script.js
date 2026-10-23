@@ -1,4 +1,3 @@
-
 /* =========================================
    ALGEON — 30 EJERCICIOS
    6 VISIBLES + ORDEN ALEATORIO + REINICIAR
@@ -43,9 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const total = EJERCICIOS_ALGEON.length;
   const obtener = id => document.getElementById(id);
 
-  // =========================================
-  // SISTEMA XP: GUARDA EL PUNTAJE EN EL NAVEGADOR
-  // =========================================
+  // SISTEMA XP
   const PUNTOS_CORRECTO = 10;
   const PUNTOS_INCORRECTO = -5;
   const elementoXP = obtener("puntajeXP");
@@ -74,11 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const contenedor = obtener("exerciseGrid");
 
   if (!contenedor) {
-    console.error('ALGEON: no se encontró el contenedor #exerciseGrid. Revisa el id en index.html.');
+    console.error("ALGEON: no se encontró #exerciseGrid en index.html.");
     return;
   }
 
-  // Elementos del modal.
+  // ELEMENTOS DEL MODAL
   const modal = obtener("modalEjercicio");
   const cerrarModal = obtener("cerrarModal");
   const cerrarResultado = obtener("cerrarResultado");
@@ -158,7 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const cantidad = completados.size;
     const porcentaje = Math.round((cantidad / total) * 100);
 
-    if (textoProgreso) textoProgreso.textContent = `${porcentaje}%`;
+    if (textoProgreso) {
+      textoProgreso.textContent = `${porcentaje}%`;
+    }
 
     if (textoPuntuacion) {
       textoPuntuacion.textContent =
@@ -225,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-
     entrada.focus();
   }
 
@@ -265,7 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (Math.abs(respuestaUsuario - correcta) < 0.000001) {
-        // RESPUESTA CORRECTA: SUMA 10 XP
         sumarXP(PUNTOS_CORRECTO);
 
         completados.add(actual);
@@ -278,6 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         entrada.disabled = true;
         formulario.hidden = true;
+
         if (botonReintentar) botonReintentar.hidden = true;
         if (cerrarResultado) cerrarResultado.textContent = "¡Continuar!";
 
@@ -287,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         actualizarProgreso();
       } else {
-        // RESPUESTA INCORRECTA: RESTA 5 XP POR CADA INTENTO
         sumarXP(PUNTOS_INCORRECTO);
 
         mostrarResultado(
@@ -316,8 +313,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (cerrarModal) cerrarModal.addEventListener("click", cerrarVentana);
-  if (cerrarResultado) cerrarResultado.addEventListener("click", cerrarVentana);
+  if (cerrarModal) {
+    cerrarModal.addEventListener("click", cerrarVentana);
+  }
+
+  if (cerrarResultado) {
+    cerrarResultado.addEventListener("click", cerrarVentana);
+  }
 
   if (modal) {
     modal.addEventListener("click", evento => {
@@ -326,19 +328,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("keydown", evento => {
-    if (evento.key === "Escape" && modal && modal.classList.contains("active")) {
+    if (
+      evento.key === "Escape" &&
+      modal &&
+      modal.classList.contains("active")
+    ) {
       cerrarVentana();
     }
   });
 
-  // Reiniciar ejercicios SIN borrar el puntaje XP.
+  // REINICIAR: BORRAR XP Y RESTABLECER EL PROGRESO
   window.reiniciarALGEON = function () {
     if (!confirm(
-      "¿Reiniciar ALGEON? Tu progreso volverá a cero y los ejercicios cambiarán de orden. Tus XP se conservarán."
+      "¿Reiniciar ALGEON? Se borrarán tus XP y tu progreso."
     )) {
       return;
     }
 
+    // Reiniciar XP guardados.
+    puntajeXP = 0;
+    localStorage.setItem("algeonXP", "0");
+    actualizarXP();
+
+    // Cerrar el modal.
     if (modal) {
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
@@ -347,20 +359,33 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
     actual = null;
     tarjetaPendiente = null;
-    completados.clear();
 
+    if (formulario) formulario.reset();
+    if (entrada) entrada.disabled = false;
+    if (resultado) {
+      resultado.textContent = "";
+      resultado.className = "answer-feedback";
+    }
+    if (botonReintentar) botonReintentar.hidden = true;
+    if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
+
+    // Reiniciar progreso y orden.
+    completados.clear();
     lista = mezclarEjercicios();
     cargarIniciales();
     actualizarProgreso();
-    actualizarXP();
 
+    // Volver a la sección de ejercicios.
     const seccion = obtener("ejercicios");
     if (seccion) {
-      seccion.scrollIntoView({ behavior: "smooth", block: "start" });
+      seccion.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }
   };
 
-  // Cargar los primeros seis ejercicios.
+  // CARGAR LOS PRIMEROS SEIS EJERCICIOS.
   lista = mezclarEjercicios();
   cargarIniciales();
   actualizarProgreso();
