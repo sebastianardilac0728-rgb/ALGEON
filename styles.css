@@ -1379,11 +1379,59 @@ input:focus-visible {
   font-size: 19px;
 }
 
+
+/* ==========================================
+   ALGEON — LOGO Y PUNTAJE XP
+========================================== */
+
+/* LOGO AGN: tamaño fijo en todas las pantallas */
+.navbar img.logo-nav {
+  display: block;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px;
+  min-height: 42px;
+  max-width: 42px !important;
+  max-height: 42px !important;
+  object-fit: contain;
+  flex: 0 0 42px;
+}
+
+/* PUNTAJE XP AL LADO DEL LOGO */
+.puntaje-algeon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: 1px solid rgba(0, 234, 255, 0.45);
+  border-radius: 12px;
+  background: rgba(0, 234, 255, 0.08);
+  color: #00eaff;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.1);
+}
+
+.puntaje-icono {
+  color: #b68cff;
+  font-size: 19px;
+}
+
 #puntajeXP {
   font-variant-numeric: tabular-nums;
 }
 
+/* AJUSTES PARA CELULARES */
 @media (max-width: 600px) {
+  .navbar img.logo-nav {
+    width: 42px !important;
+    height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+    flex: 0 0 42px;
+  }
+
   .puntaje-algeon {
     padding: 7px 9px;
     font-size: 13px;
