@@ -358,7 +358,6 @@ input:focus-visible {
   border-color: rgba(138, 43, 226, 0.4);
 }
 
-/* SECCIONES */
 
 .section {
   padding: 85px 8%;
@@ -388,33 +387,7 @@ input:focus-visible {
   gap: 22px;
 }
 
-/* EXPLICACIÓN DE ÁLGEBRA */
 
-.explicacion-algebra {
-  max-width: 850px;
-  margin: 50px auto 80px;
-  padding: 25px;
-  color: #e8f3ff;
-  background: rgba(12, 18, 40, 0.85);
-  border: 1px solid var(--cyan);
-  border-radius: 18px;
-  box-shadow: 0 0 20px rgba(0, 234, 255, 0.12);
-  line-height: 1.7;
-}
-
-.explicacion-algebra h2 {
-  margin-bottom: 12px;
-  color: var(--cyan);
-}
-
-.explicacion-algebra h3 {
-  margin-top: 18px;
-  color: #c084fc;
-}
-
-.explicacion-algebra p {
-  margin: 10px 0;
-}
 
 .feature-card {
   padding: 30px;
@@ -458,14 +431,7 @@ input:focus-visible {
   font-size: 0.94rem;
 }
 
-.simbolo-x {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
 
-/* EJERCICIOS */
 
 .exercises-section {
   background: linear-gradient(
@@ -594,7 +560,7 @@ input:focus-visible {
   box-shadow: 0 0 22px rgba(0, 234, 255, 0.25);
 }
 
-/* PROGRESO */
+/* PROGRESS */
 
 .progress-panel {
   max-width: 850px;
@@ -651,7 +617,7 @@ input:focus-visible {
   font-size: 0.86rem;
 }
 
-/* VENTANA DE EJERCICIOS */
+/* MODAL */
 
 .modal-overlay {
   position: fixed;
@@ -794,7 +760,7 @@ input:focus-visible {
   display: none !important;
 }
 
-/* PIE DE PÁGINA */
+/* FOOTER */
 
 .footer {
   padding: 35px 8%;
@@ -817,47 +783,7 @@ input:focus-visible {
   font-size: 0.85rem;
 }
 
-/* CITA ATRIBUIDA A ALBERT EINSTEIN */
-
-.footer-cita {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  flex: 1 1 100%;
-  max-width: 650px;
-  margin: 10px auto;
-  padding: 18px;
-  border-left: 2px solid var(--cyan);
-  background: rgba(0, 234, 255, 0.04);
-  border-radius: 12px;
-  text-align: left;
-}
-
-.footer-x {
-  flex-shrink: 0;
-  color: var(--cyan);
-  font-size: 42px;
-  font-weight: 800;
-  text-shadow: 0 0 15px rgba(0, 234, 255, 0.65);
-}
-
-.footer-cita blockquote {
-  margin: 0;
-  color: #d7def0;
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.footer-cita cite {
-  display: block;
-  margin-top: 6px;
-  color: var(--cyan);
-  font-size: 11px;
-  font-style: normal;
-}
-
-/* ANIMACIONES */
+/* ANIMATIONS */
 
 @keyframes appear {
   from {
@@ -907,7 +833,7 @@ input:focus-visible {
   }
 }
 
-/* DISEÑO RESPONSIVE */
+/* RESPONSIVE DESIGN */
 
 @media (max-width: 950px) {
   .navbar {
@@ -1005,14 +931,9 @@ input:focus-visible {
     flex-direction: column;
     text-align: center;
   }
-
-  .footer-cita {
-    width: 100%;
-    gap: 10px;
-  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 420px) {
   .hero h1 {
     font-size: 2.5rem;
     letter-spacing: -1px;
@@ -1033,21 +954,7 @@ input:focus-visible {
   .progress-number {
     font-size: 1.8rem;
   }
-
-  .footer-cita {
-    padding: 12px;
-  }
-
-  .footer-x {
-    font-size: 34px;
-  }
-
-  .footer-cita blockquote {
-    font-size: 12px;
-  }
 }
-
-/* RESPETAR PREFERENCIAS DE MOVIMIENTO */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1058,4 +965,3 @@ input:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
