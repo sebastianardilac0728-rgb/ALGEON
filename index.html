@@ -22,19 +22,23 @@
       <a href="#progreso">Mi progreso</a>
     </nav>
 
-    <a href="#ejercicios" class="nav-button">Empezar</a>
+    <div class="nav-actions">
+      <a href="#ejercicios" class="nav-button">Empezar</a>
+      <button
+        type="button"
+        class="nav-button"
+        id="botonReiniciar"
+        onclick="reiniciarALGEON()">
+        Reiniciar
+      </button>
+    </div>
   </header>
 
   <main>
     <section class="hero" id="inicio">
       <div class="hero-content">
         <p class="eyebrow">EL FUTURO DE LAS MATEMÁTICAS</p>
-
-        <h1>
-          El álgebra tiene<br>
-          <span>una nueva dimensión.</span>
-        </h1>
-
+        <h1>El álgebra tiene<br><span>una nueva dimensión.</span></h1>
         <p class="hero-description">
           Aprende, resuelve y demuestra lo que sabes.
           Convierte los problemas matemáticos en nuevos logros.
@@ -46,25 +50,15 @@
         </div>
 
         <div class="hero-stats">
-          <div>
-            <strong>01</strong>
-            <span>Basico</span>
-          </div>
-          <div>
-            <strong>02</strong>
-            <span>Medio</span>
-          </div>
-          <div>
-            <strong>03</strong>
-            <span>Dificil</span>
-          </div>
+          <div><strong>01</strong><span>Básico</span></div>
+          <div><strong>02</strong><span>Medio</span></div>
+          <div><strong>03</strong><span>Difícil</span></div>
         </div>
       </div>
 
       <div class="hero-visual" aria-label="Ilustración matemática">
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
-
         <div class="math-core">
           <span class="math-symbol symbol-one">+</span>
           <span class="math-symbol symbol-two">x²</span>
@@ -72,7 +66,6 @@
           <span class="math-symbol symbol-four">=</span>
           <div class="core-letter">x</div>
         </div>
-
         <div class="floating-label label-top">x + y = ?</div>
         <div class="floating-label label-bottom">SYSTEM ONLINE</div>
       </div>
@@ -81,7 +74,6 @@
     <section class="section" id="aprender">
       <div class="footer-cita">
         <span class="footer-x" aria-hidden="true">x</span>
-
         <blockquote>
           “Las matemáticas son el alfabeto con el cual Dios ha escrito el universo”.
           <cite>Albert Einstein</cite>
@@ -96,7 +88,6 @@
 
       <div class="explicacion-algebra">
         <h2>¿Cómo se resuelve una ecuación?</h2>
-
         <p>
           Resolver una ecuación consiste en encontrar el valor de la
           incógnita, que normalmente se representa con la letra x.
@@ -105,17 +96,13 @@
         </p>
 
         <h3>Ejemplo paso a paso</h3>
-
         <p><strong>Ecuación:</strong> 3x + 6 = 21</p>
-
         <p><strong>Paso 1:</strong> Restamos 6 a ambos lados.</p>
         <p>3x + 6 − 6 = 21 − 6</p>
         <p><strong>Resultado:</strong> 3x = 15</p>
-
         <p><strong>Paso 2:</strong> Dividimos ambos lados entre 3.</p>
         <p>3x ÷ 3 = 15 ÷ 3</p>
         <p><strong>Resultado final:</strong> x = 5</p>
-
         <p>
           <strong>¡Listo!</strong> La solución es x = 5.
           Recuerda que cualquier operación que hagas en un lado
@@ -127,32 +114,21 @@
         <article class="feature-card">
           <div class="feature-icon">⌘</div>
           <h3>Comprende</h3>
-          <p>
-            Descubre cómo funcionan las ecuaciones y qué representan
-            sus incógnitas.
-          </p>
+          <p>Descubre cómo funcionan las ecuaciones y qué representan sus incógnitas.</p>
         </article>
-
         <article class="feature-card">
           <div class="feature-icon">⟡</div>
           <h3>Practica</h3>
-          <p>
-            Resuelve ejercicios y comprueba tus respuestas para
-            aprender de tus errores.
-          </p>
+          <p>Resuelve ejercicios y comprueba tus respuestas para aprender de tus errores.</p>
         </article>
-
         <article class="feature-card">
           <div class="feature-icon">↗</div>
           <h3>Avanza</h3>
-          <p>
-            Completa desafíos y observa cómo aumenta tu progreso.
-          </p>
+          <p>Completa desafíos y observa cómo aumenta tu progreso.</p>
         </article>
       </div>
     </section>
 
-    <!-- SECCIÓN DE LOS 30 EJERCICIOS -->
     <section class="section exercises-section" id="ejercicios">
       <div class="section-heading">
         <p class="eyebrow">CENTRO DE ENTRENAMIENTO</p>
@@ -160,11 +136,9 @@
         <p>30 ejercicios para practicar y mejorar tus habilidades.</p>
       </div>
 
-      <!-- script.js crea aquí las 30 tarjetas -->
       <div class="exercise-grid" id="exerciseGrid"></div>
     </section>
 
-    <!-- PROGRESO ACTUALIZADO A 30 EJERCICIOS -->
     <section class="section progress-section" id="progreso">
       <div class="progress-panel">
         <div class="progress-heading">
@@ -172,7 +146,6 @@
             <p class="eyebrow">TU RENDIMIENTO</p>
             <h2>Tu progreso<span>.</span></h2>
           </div>
-
           <div class="progress-number" id="textoProgreso">0%</div>
         </div>
 
@@ -200,14 +173,11 @@
 
   <footer class="footer">
     <a href="#inicio" class="logo">ALGEON<span>.</span></a>
-
     <p>Explora las matemáticas. Construye tu futuro.</p>
     <p>Liceo Maria Nell</p>
-
     <span>© 2026 ALGEON</span>
   </footer>
 
-  <!-- VENTANA EMERGENTE DE LOS EJERCICIOS -->
   <div
     class="modal-overlay"
     id="modalEjercicio"
@@ -224,14 +194,11 @@
         aria-label="Cerrar ventana">×</button>
 
       <p class="eyebrow" id="modalPregunta">DESAFÍO</p>
-
       <h2 id="modalTitulo">Resuelve la ecuación<span>.</span></h2>
-
       <p id="modalEnunciado">Escribe tu respuesta para continuar.</p>
 
       <form id="formularioRespuesta">
         <label for="respuestaUsuario">Tu respuesta para x</label>
-
         <input
           id="respuestaUsuario"
           name="respuestaUsuario"
@@ -240,16 +207,12 @@
           placeholder="Escribe un número"
           required
           autocomplete="off">
-
         <button class="button-primary check-button" type="submit">
           Comprobar respuesta
         </button>
       </form>
 
-      <div
-        id="resultadoRespuesta"
-        class="answer-feedback"
-        aria-live="polite"></div>
+      <div id="resultadoRespuesta" class="answer-feedback" aria-live="polite"></div>
 
       <button
         id="intentarDeNuevo"
@@ -267,5 +230,17 @@
       </button>
     </div>
   </div>
+
+  <script>
+    function reiniciarALGEON() {
+      const confirmar = confirm(
+        "¿Quieres reiniciar ALGEON? Se restablecerá tu progreso y cambiará el orden de los ejercicios."
+      );
+
+      if (confirmar) {
+        window.location.reload();
+      }
+    }
+  </script>
 </body>
 </html>
