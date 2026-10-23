@@ -1136,10 +1136,10 @@ input:focus-visible {
     height: 125px;
   }
 
-  .footer-cita {
-    gap: 10px;
-    padding: 13px;
-  }
+.footer-cita {
+    position: relative;
+    margin: -20px auto 65px;
+}
 
   .footer-x {
     font-size: 32px;
