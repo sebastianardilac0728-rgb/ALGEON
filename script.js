@@ -37,12 +37,9 @@ const EJERCICIOS_ALGEON = [
   { titulo: "Reto final II", ecuacion: "3(x + 4) - 2 = 25", respuesta: 5, pista: "Suma 2, divide entre 3 y resta 4." }
 ];
 
-let reiniciarALGEON = null;
-
 document.addEventListener("DOMContentLoaded", () => {
   const MAX_VISIBLES = 6;
   const total = EJERCICIOS_ALGEON.length;
-
   const obtener = id => document.getElementById(id);
 
   const modal = obtener("modalEjercicio");
@@ -66,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     !modal || !cerrarModal || !cerrarResultado || !formulario ||
     !entrada || !tituloModal || !preguntaModal || !enunciadoModal ||
     !resultado || !botonReintentar || !textoProgreso ||
-    !textoPuntuacion || !barraProgreso || !progresoRelleno || !contenedor
+    !textoPuntuacion || !barraProgreso || !progresoRelleno ||
+    !contenedor
   ) {
     console.error("ALGEON: falta algún elemento necesario en el HTML.");
     return;
@@ -76,9 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let siguiente = 0;
   let actual = null;
   let tarjetaPendiente = null;
-  let completados = new Set();
+  const completados = new Set();
 
-  // Mezcla los ejercicios para crear una nueva ronda.
+  // Mezcla los 30 ejercicios sin clasificarlos por nivel.
   function mezclarEjercicios() {
     const copia = [...EJERCICIOS_ALGEON];
 
@@ -90,19 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return copia;
   }
 
+  // Crea una tarjeta sin etiquetas de nivel.
   function crearTarjeta(ejercicio, indice) {
-    const numeroOriginal = EJERCICIOS_ALGEON.indexOf(ejercicio) + 1;
-    const nivel = Math.ceil(numeroOriginal / 10);
     const tarjeta = document.createElement("article");
-
     tarjeta.className = "exercise-card";
-
-    const claseNivel = nivel === 2 ? "purple" : nivel === 3 ? "pink" : "";
 
     tarjeta.innerHTML = `
       <div class="card-top">
-        <span class="level-badge ${claseNivel}">NIVEL 0${nivel}</span>
-        <span class="card-number">${String(indice + 1).padStart(2, "0")} / ${total}</span>
+        <span class="card-number">
+          DESAFÍO ${String(indice + 1).padStart(2, "0")} / ${total}
+        </span>
       </div>
       <h3></h3>
       <p>Encuentra el valor desconocido.</p>
@@ -118,7 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const boton = tarjeta.querySelector(".btn-resolver");
 
     boton.dataset.pregunta = `Desafío ${indice + 1}`;
-    boton.dataset.enunciado = `Resuelve: ${ejercicio.ecuacion}. ¿Cuánto vale x?`;
+    boton.dataset.enunciado =
+      `Resuelve: ${ejercicio.ecuacion}. ¿Cuánto vale x?`;
     boton.dataset.respuesta = String(ejercicio.respuesta);
     boton.dataset.pista = ejercicio.pista;
 
@@ -127,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return tarjeta;
   }
 
+  // Mantiene un máximo de 6 tarjetas visibles al inicio.
   function cargarIniciales() {
     contenedor.innerHTML = "";
     siguiente = 0;
@@ -150,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     barraProgreso.setAttribute("aria-valuenow", cantidad);
   }
 
+  // Al resolver uno, lo retira y agrega el siguiente.
   function avanzarTarjeta() {
     if (!tarjetaPendiente) return;
 
@@ -179,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     actual = boton;
 
     preguntaModal.textContent = boton.dataset.pregunta;
-    tituloModal.innerHTML = 'Resuelve la ecuación<span>.</span>';
+    tituloModal.textContent = "Resuelve la ecuación.";
     enunciadoModal.textContent = boton.dataset.enunciado;
 
     entrada.value = "";
@@ -222,7 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const correcta = Number(actual.dataset.respuesta);
 
     if (texto === "" || !Number.isFinite(respuestaUsuario)) {
-      mostrarResultado("Escribe una respuesta válida antes de comprobar.", "incorrect");
+      mostrarResultado(
+        "Escribe una respuesta válida antes de comprobar.",
+        "incorrect"
+      );
       return;
     }
 
@@ -278,11 +279,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // El botón Reiniciar del index.html llama esta función.
-  reiniciarALGEON = function () {
-    if (!confirm("¿Reiniciar ALGEON? Tu progreso actual volverá a cero y los ejercicios cambiarán de orden.")) {
-      return;
-    }
+  // Reinicia el progreso y crea un orden aleatorio nuevo.
+  window.reiniciarALGEON = function () {
+    const confirmar = confirm(
+      "¿Reiniciar ALGEON? Tu progreso volverá a cero y los 30 ejercicios cambiarán de orden."
+    );
+
+    if (!confirmar) return;
 
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
@@ -290,22 +293,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     actual = null;
     tarjetaPendiente = null;
-    completados = new Set();
+    completados.clear();
+
     lista = mezclarEjercicios();
 
     cargarIniciales();
     actualizarProgreso();
 
-    document.getElementById("ejercicios").scrollIntoView({
+    obtener("ejercicios").scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
   };
 
-  // Comienza cada sesión con un orden aleatorio.
+  // Cada sesión comienza con los ejercicios en orden aleatorio.
   lista = mezclarEjercicios();
   cargarIniciales();
   actualizarProgreso();
 
-  console.log("ALGEON listo: 30 ejercicios, 6 visibles y reinicio aleatorio.");
+  console.log(
+    "ALGEON listo: 30 ejercicios mezclados, 6 visibles y reinicio aleatorio."
+  );
 });
