@@ -1,3 +1,4 @@
+
 :root {
   --background: #080812;
   --background-light: #0e1020;
@@ -392,7 +393,7 @@ input:focus-visible {
 
 .explicacion-algebra {
   max-width: 850px;
-  margin: 35px auto;
+  margin: 50px auto 80px;
   padding: 25px;
   color: #e8f3ff;
   background: rgba(12, 18, 40, 0.85);
