@@ -1140,3 +1140,18 @@ header.navbar > img.logo-nav {
     transition-duration: .01ms !important;
   }
 }
+/* CORRECCIÓN DIRECTA DEL LOGO DE ALGEON */
+header.navbar img.logo-nav {
+  display: block !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  object-fit: contain !important;
+  flex: 0 0 42px !important;
+  padding: 0 !important;
+  margin: 0 12px 0 0 !important;
+  border-radius: 0 !important;
+}
