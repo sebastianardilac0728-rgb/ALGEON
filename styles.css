@@ -1,8 +1,3 @@
-
-/* ========================================
-   ALGEON — DISEÑO NEÓN FUTURISTA
-======================================== */
-
 :root {
   --background: #080812;
   --background-light: #0e1020;
@@ -18,7 +13,6 @@
   --radius: 20px;
 }
 
-/* RESET */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -82,10 +76,6 @@ input:focus-visible {
   color: var(--background);
 }
 
-/* ========================================
-   BARRA DE NAVEGACIÓN
-======================================== */
-
 .navbar {
   width: 100%;
   min-height: 78px;
@@ -102,7 +92,6 @@ input:focus-visible {
   backdrop-filter: blur(18px);
 }
 
-/* LOGO: tamaño limitado en todas las pantallas */
 header.navbar > img.logo-nav {
   display: block !important;
   width: 42px !important;
@@ -173,7 +162,6 @@ header.navbar > img.logo-nav {
   box-shadow: 0 0 22px rgba(0,234,255,.35);
 }
 
-/* PUNTAJE XP */
 .puntaje-algeon {
   display: inline-flex;
   align-items: center;
@@ -198,10 +186,6 @@ header.navbar > img.logo-nav {
 #puntajeXP {
   font-variant-numeric: tabular-nums;
 }
-
-/* ========================================
-   PORTADA
-======================================== */
 
 .hero {
   min-height: 610px;
@@ -309,7 +293,6 @@ header.navbar > img.logo-nav {
   font-size: .82rem;
 }
 
-/* ILUSTRACIÓN MATEMÁTICA */
 .hero-visual {
   min-height: 390px;
   position: relative;
@@ -412,10 +395,6 @@ header.navbar > img.logo-nav {
   border-color: rgba(138,43,226,.4);
 }
 
-/* ========================================
-   SECCIONES
-======================================== */
-
 .section {
   padding: 85px 8%;
   scroll-margin-top: 95px;
@@ -438,7 +417,6 @@ header.navbar > img.logo-nav {
   color: var(--muted);
 }
 
-/* TARJETAS */
 .feature-grid,
 .exercise-grid {
   display: grid;
@@ -483,7 +461,6 @@ header.navbar > img.logo-nav {
   font-size: .94rem;
 }
 
-/* EJERCICIOS */
 .exercises-section {
   background: linear-gradient(180deg, transparent, rgba(0,234,255,.025), transparent);
 }
@@ -605,7 +582,6 @@ header.navbar > img.logo-nav {
   box-shadow: 0 0 22px rgba(0,234,255,.25);
 }
 
-/* PROGRESO */
 .progress-panel {
   max-width: 850px;
   margin: 0 auto;
@@ -659,7 +635,6 @@ header.navbar > img.logo-nav {
   font-size: .86rem;
 }
 
-/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -796,7 +771,6 @@ header.navbar > img.logo-nav {
   display: none !important;
 }
 
-/* PIE DE PÁGINA */
 .footer {
   padding: 35px 8%;
   display: flex;
@@ -818,7 +792,6 @@ header.navbar > img.logo-nav {
   font-size: .85rem;
 }
 
-/* CITA */
 .footer-cita {
   position: relative;
   display: flex;
@@ -872,7 +845,6 @@ header.navbar > img.logo-nav {
   letter-spacing: .5px;
 }
 
-/* EXPLICACIÓN DEL ÁLGEBRA */
 .explicacion-algebra {
   width: 100%;
   max-width: 900px;
@@ -911,7 +883,6 @@ header.navbar > img.logo-nav {
   font-weight: 600;
 }
 
-/* ANIMACIONES */
 @keyframes appear {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
@@ -936,7 +907,6 @@ header.navbar > img.logo-nav {
   }
 }
 
-/* TABLET */
 @media (max-width: 950px) {
   .navbar {
     padding-inline: 5%;
@@ -965,7 +935,6 @@ header.navbar > img.logo-nav {
   }
 }
 
-/* CELULARES */
 @media (max-width: 720px) {
   .navbar {
     flex-wrap: wrap;
@@ -1088,7 +1057,6 @@ header.navbar > img.logo-nav {
   }
 }
 
-/* CELULARES PEQUEÑOS */
 @media (max-width: 420px) {
   .hero h1 {
     font-size: 2.5rem;
@@ -1129,7 +1097,6 @@ header.navbar > img.logo-nav {
   }
 }
 
-/* RESPETAR PREFERENCIAS DE MOVIMIENTO */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1140,7 +1107,7 @@ header.navbar > img.logo-nav {
     transition-duration: .01ms !important;
   }
 }
-/* CORRECCIÓN DIRECTA DEL LOGO DE ALGEON */
+
 header.navbar img.logo-nav {
   display: block !important;
   width: 42px !important;
