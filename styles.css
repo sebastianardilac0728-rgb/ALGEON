@@ -965,21 +965,4 @@ input:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
 
-.youtube-oculto {
-  position: fixed;
-  width: 1px;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  opacity: 0.01;
-  pointer-events: none;
-}
-
-.youtube-oculto iframe {
-  width: 1px;
-  height: 1px;
-  border: 0;
-}
