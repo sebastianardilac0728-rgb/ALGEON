@@ -333,12 +333,6 @@ input:focus-visible {
   color: var(--pink);
   text-shadow: 0 0 16px var(--pink);
 }
-.simbolo-x {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
 
 .floating-label {
   position: absolute;
@@ -437,7 +431,12 @@ input:focus-visible {
   font-size: 0.94rem;
 }
 
-
+.simbolo-x {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 .exercises-section {
   background: linear-gradient(
