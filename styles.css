@@ -1,17 +1,27 @@
+
+/* ========================================
+   ALGEON — DISEÑO NEÓN FUTURISTA
+   Colores: cian, morado y rosa
+======================================== */
+
 :root {
   --background: #080812;
   --background-light: #0e1020;
   --card: rgba(17, 21, 40, 0.82);
+
   --cyan: #00eaff;
   --cyan-light: #8bf6ff;
   --purple: #8a2be2;
   --pink: #ff3cac;
+
   --white: #f3f7ff;
   --muted: #a2adc9;
   --border: rgba(0, 234, 255, 0.2);
   --glow: 0 0 24px rgba(0, 234, 255, 0.15);
   --radius: 20px;
 }
+
+/* RESET GENERAL */
 
 * {
   box-sizing: border-box;
@@ -27,14 +37,25 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 15% 10%, rgba(0, 234, 255, 0.08), transparent 32%),
-    radial-gradient(ellipse at 85% 35%, rgba(138, 43, 226, 0.09), transparent 35%),
+    radial-gradient(
+      ellipse at 15% 10%,
+      rgba(0, 234, 255, 0.08),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 85% 35%,
+      rgba(138, 43, 226, 0.09),
+      transparent 35%
+    ),
     var(--background);
+
   color: var(--white);
   font-family: "Segoe UI", Arial, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
 }
+
+/* CUADRÍCULA FUTURISTA */
 
 body::before {
   content: "";
@@ -43,9 +64,18 @@ body::before {
   pointer-events: none;
   z-index: -1;
   opacity: 0.17;
+
   background-image:
-    linear-gradient(rgba(0, 234, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 234, 255, 0.08) 1px, transparent 1px);
+    linear-gradient(
+      rgba(0, 234, 255, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 234, 255, 0.08) 1px,
+      transparent 1px
+    );
+
   background-size: 48px 48px;
   mask-image: linear-gradient(to bottom, black, transparent 85%);
 }
@@ -76,19 +106,24 @@ input:focus-visible {
   color: var(--background);
 }
 
-/* NAVIGATION */
+/* ========================================
+   BARRA DE NAVEGACIÓN
+======================================== */
 
 .navbar {
   width: 100%;
   min-height: 78px;
   padding: 16px 7%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
+
   position: sticky;
   top: 0;
   z-index: 20;
+
   background: rgba(8, 8, 18, 0.88);
   border-bottom: 1px solid rgba(0, 234, 255, 0.12);
   backdrop-filter: blur(18px);
@@ -124,6 +159,7 @@ input:focus-visible {
 
 .navbar nav a:hover {
   color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan);
 }
 
 .nav-button {
@@ -141,11 +177,14 @@ input:focus-visible {
   box-shadow: 0 0 22px rgba(0, 234, 255, 0.35);
 }
 
-/* HERO */
+/* ========================================
+   PORTADA PRINCIPAL
+======================================== */
 
 .hero {
   min-height: 610px;
   padding: 90px 8% 80px;
+
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
@@ -191,16 +230,23 @@ input:focus-visible {
   gap: 14px;
 }
 
+/* BOTONES */
+
 .button-primary,
 .button-secondary {
   min-height: 48px;
   padding: 13px 21px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 10px;
   font-weight: 750;
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
     background 0.25s ease;
 }
 
@@ -228,6 +274,8 @@ input:focus-visible {
   transform: translateY(-2px);
 }
 
+/* ESTADÍSTICAS */
+
 .hero-stats {
   display: flex;
   flex-wrap: wrap;
@@ -250,9 +298,14 @@ input:focus-visible {
   font-size: 0.82rem;
 }
 
+/* ========================================
+   ILUSTRACIÓN MATEMÁTICA NEÓN
+======================================== */
+
 .hero-visual {
   min-height: 390px;
   position: relative;
+
   display: grid;
   place-items: center;
   isolation: isolate;
@@ -261,19 +314,24 @@ input:focus-visible {
 .math-core {
   width: min(245px, 65vw);
   aspect-ratio: 1;
+
   display: grid;
   place-items: center;
   position: relative;
+
   border: 1px solid rgba(0, 234, 255, 0.6);
   border-radius: 50%;
+
   background: radial-gradient(
     circle,
     rgba(0, 234, 255, 0.15),
     rgba(8, 8, 18, 0.7) 65%
   );
+
   box-shadow:
     0 0 40px rgba(0, 234, 255, 0.14),
     inset 0 0 35px rgba(0, 234, 255, 0.1);
+
   animation: corePulse 4s ease-in-out infinite;
 }
 
@@ -358,9 +416,13 @@ input:focus-visible {
   border-color: rgba(138, 43, 226, 0.4);
 }
 
+/* ========================================
+   SECCIONES GENERALES
+======================================== */
 
 .section {
   padding: 85px 8%;
+  scroll-margin-top: 95px;
 }
 
 .section-heading {
@@ -380,6 +442,8 @@ input:focus-visible {
   color: var(--muted);
 }
 
+/* TARJETAS DE CONTENIDO Y EJERCICIOS */
+
 .feature-grid,
 .exercise-grid {
   display: grid;
@@ -387,18 +451,20 @@ input:focus-visible {
   gap: 22px;
 }
 
-
-
 .feature-card {
   padding: 30px;
   border: 1px solid rgba(138, 43, 226, 0.28);
   border-radius: var(--radius);
+
   background: linear-gradient(
     145deg,
     rgba(19, 18, 40, 0.9),
     rgba(10, 12, 25, 0.9)
   );
-  transition: transform 0.3s ease, border-color 0.3s ease,
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
@@ -411,8 +477,10 @@ input:focus-visible {
 .feature-icon {
   width: 50px;
   height: 50px;
+
   display: grid;
   place-items: center;
+
   margin-bottom: 22px;
   border: 1px solid rgba(0, 234, 255, 0.35);
   border-radius: 14px;
@@ -431,7 +499,9 @@ input:focus-visible {
   font-size: 0.94rem;
 }
 
-
+/* ========================================
+   ZONA DE EJERCICIOS
+======================================== */
 
 .exercises-section {
   background: linear-gradient(
@@ -444,15 +514,21 @@ input:focus-visible {
 
 .exercise-card {
   position: relative;
+
   display: flex;
   flex-direction: column;
+
   padding: 26px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
+
   box-shadow: 0 8px 35px rgba(0, 0, 0, 0.12);
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease,
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
@@ -524,14 +600,17 @@ input:focus-visible {
 .equation {
   margin: 25px 0;
   padding: 22px 10px;
+
   border: 1px solid rgba(0, 234, 255, 0.12);
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.18);
+
   color: var(--cyan);
   font-family: "Courier New", monospace;
   font-size: clamp(1.8rem, 3vw, 2.3rem);
   font-weight: 800;
   text-align: center;
+
   text-shadow: 0 0 20px rgba(0, 234, 255, 0.25);
 }
 
@@ -539,14 +618,17 @@ input:focus-visible {
   width: 100%;
   margin-top: auto;
   padding: 13px 16px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   border: 1px solid rgba(0, 234, 255, 0.5);
   border-radius: 10px;
   background: rgba(0, 234, 255, 0.06);
   color: var(--cyan);
   font-weight: 750;
+
   transition: 0.25s ease;
 }
 
@@ -560,17 +642,26 @@ input:focus-visible {
   box-shadow: 0 0 22px rgba(0, 234, 255, 0.25);
 }
 
-/* PROGRESS */
+/* ========================================
+   PANEL DE PROGRESO
+======================================== */
 
 .progress-panel {
   max-width: 850px;
   margin: 0 auto;
   padding: 35px;
+
   border: 1px solid rgba(0, 234, 255, 0.25);
   border-radius: 24px;
+
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(138, 43, 226, 0.1), transparent 45%),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(138, 43, 226, 0.1),
+      transparent 45%
+    ),
     rgba(15, 17, 33, 0.85);
+
   box-shadow: var(--glow);
 }
 
@@ -597,6 +688,7 @@ input:focus-visible {
   height: 13px;
   margin-top: 15px;
   overflow: hidden;
+
   border: 1px solid rgba(0, 234, 255, 0.12);
   border-radius: 50px;
   background: #171a2c;
@@ -606,8 +698,10 @@ input:focus-visible {
   width: 0%;
   height: 100%;
   border-radius: inherit;
+
   background: linear-gradient(90deg, var(--purple), var(--cyan));
   box-shadow: 0 0 18px rgba(0, 234, 255, 0.5);
+
   transition: width 0.5s ease;
 }
 
@@ -617,15 +711,19 @@ input:focus-visible {
   font-size: 0.86rem;
 }
 
-/* MODAL */
+/* ========================================
+   VENTANAS EMERGENTES
+======================================== */
 
 .modal-overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
+
   display: none;
   align-items: center;
   justify-content: center;
+
   padding: 20px;
   background: rgba(2, 3, 12, 0.82);
   backdrop-filter: blur(10px);
@@ -642,14 +740,22 @@ input:focus-visible {
   max-height: 90vh;
   overflow-y: auto;
   padding: 35px;
+
   border: 1px solid rgba(0, 234, 255, 0.45);
   border-radius: 22px;
+
   background:
-    radial-gradient(ellipse at top right, rgba(138, 43, 226, 0.13), transparent 55%),
+    radial-gradient(
+      ellipse at top right,
+      rgba(138, 43, 226, 0.13),
+      transparent 55%
+    ),
     #0d1020;
+
   box-shadow:
     0 0 60px rgba(0, 234, 255, 0.12),
     0 25px 80px rgba(0, 0, 0, 0.5);
+
   animation: modalAppear 0.25s ease;
 }
 
@@ -657,12 +763,15 @@ input:focus-visible {
   position: absolute;
   top: 13px;
   right: 16px;
+
   width: 35px;
   height: 35px;
+
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 9px;
   background: rgba(255, 255, 255, 0.04);
   color: var(--white);
+
   font-size: 1.6rem;
   line-height: 1;
 }
@@ -673,7 +782,7 @@ input:focus-visible {
 }
 
 .modal-box h2 {
-  padding-right: 15px;
+  padding-right: 40px;
   font-size: 1.75rem;
   line-height: 1.25;
 }
@@ -699,10 +808,12 @@ input:focus-visible {
   width: 100%;
   min-height: 50px;
   padding: 13px 15px;
+
   border: 1px solid rgba(0, 234, 255, 0.25);
   border-radius: 10px;
   background: #080b17;
   color: var(--white);
+
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -719,7 +830,6 @@ input:focus-visible {
 .check-button {
   width: 100%;
   margin-top: 15px;
-  cursor: pointer;
   border: 0;
 }
 
@@ -727,8 +837,10 @@ input:focus-visible {
   display: none;
   margin-top: 20px;
   padding: 14px;
+
   border: 1px solid transparent;
   border-radius: 10px;
+
   white-space: pre-line;
   font-size: 0.93rem;
 }
@@ -760,15 +872,19 @@ input:focus-visible {
   display: none !important;
 }
 
-/* FOOTER */
+/* ========================================
+   PIE DE PÁGINA
+======================================== */
 
 .footer {
   padding: 35px 8%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 15px;
+
   border-top: 1px solid rgba(0, 234, 255, 0.12);
   background: rgba(5, 6, 14, 0.6);
 }
@@ -783,7 +899,51 @@ input:focus-visible {
   font-size: 0.85rem;
 }
 
-/* ANIMATIONS */
+/* CITA ATRIBUIDA A ALBERT EINSTEIN */
+
+.footer-cita {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex: 1 1 100%;
+  max-width: 650px;
+  margin: 10px auto;
+  padding: 18px;
+
+  border-left: 2px solid var(--cyan);
+  background: rgba(0, 234, 255, 0.04);
+  border-radius: 12px;
+
+  text-align: left;
+}
+
+.footer-x {
+  flex-shrink: 0;
+  color: var(--cyan);
+  font-size: 42px;
+  font-weight: 800;
+  text-shadow: 0 0 15px rgba(0, 234, 255, 0.65);
+}
+
+.footer-cita blockquote {
+  margin: 0;
+  color: #d7def0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.footer-cita cite {
+  display: block;
+  margin-top: 6px;
+  color: var(--cyan);
+  font-size: 11px;
+  font-style: normal;
+}
+
+/* ========================================
+   ANIMACIONES
+======================================== */
 
 @keyframes appear {
   from {
@@ -820,7 +980,8 @@ input:focus-visible {
 }
 
 @keyframes corePulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow:
       0 0 40px rgba(0, 234, 255, 0.14),
       inset 0 0 35px rgba(0, 234, 255, 0.1);
@@ -833,7 +994,9 @@ input:focus-visible {
   }
 }
 
-/* RESPONSIVE DESIGN */
+/* ========================================
+   ADAPTACIÓN A TABLET
+======================================== */
 
 @media (max-width: 950px) {
   .navbar {
@@ -862,6 +1025,10 @@ input:focus-visible {
     padding: 20px;
   }
 }
+
+/* ========================================
+   ADAPTACIÓN A CELULARES
+======================================== */
 
 @media (max-width: 720px) {
   .navbar {
@@ -931,7 +1098,16 @@ input:focus-visible {
     flex-direction: column;
     text-align: center;
   }
+
+  .footer-cita {
+    width: 100%;
+    text-align: left;
+  }
 }
+
+/* ========================================
+   CELULARES PEQUEÑOS
+======================================== */
 
 @media (max-width: 420px) {
   .hero h1 {
@@ -954,7 +1130,23 @@ input:focus-visible {
   .progress-number {
     font-size: 1.8rem;
   }
+
+  .orbit {
+    width: 250px;
+    height: 125px;
+  }
+
+  .footer-cita {
+    gap: 10px;
+    padding: 13px;
+  }
+
+  .footer-x {
+    font-size: 32px;
+  }
 }
+
+/* RESPETAR PREFERENCIAS DE MOVIMIENTO */
 
 @media (prefers-reduced-motion: reduce) {
   *,
