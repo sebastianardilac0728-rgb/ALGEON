@@ -1,4 +1,3 @@
-
 const EJERCICIOS_ALGEON = [
   { titulo: "Ecuación básica", ecuacion: "3x + 6 = 21", respuesta: 5, pista: "Resta 6 a ambos lados y divide entre 3." },
   { titulo: "Multiplicación", ecuacion: "2x = 18", respuesta: 9, pista: "Divide ambos lados entre 2." },
