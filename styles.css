@@ -1347,10 +1347,13 @@ input:focus-visible {
         font-size: 0.8rem;
         line-height: 1.5;
     }
-}
-.logo-nav {
-  height: 42px;
-  width: auto;
-  object-fit: contain;
+/* LOGO AGN EN LA BARRA DE NAVEGACIÓN */
+.navbar img.logo-nav {
   display: block;
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain;
+  flex: 0 0 48px;
 }
