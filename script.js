@@ -42,6 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const total = EJERCICIOS_ALGEON.length;
   const obtener = id => document.getElementById(id);
 
+  const contenedor = obtener("exerciseGrid");
+
+  if (!contenedor) {
+    console.error('ALGEON: no se encontró el contenedor #exerciseGrid. Revisa el id en index.html.');
+    return;
+  }
+
+  // Elementos del modal: se comprueban por separado para que
+  // su ausencia no impida cargar las tarjetas.
   const modal = obtener("modalEjercicio");
   const cerrarModal = obtener("cerrarModal");
   const cerrarResultado = obtener("cerrarResultado");
@@ -57,18 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const textoPuntuacion = obtener("textoPuntuacion");
   const barraProgreso = obtener("barraProgreso");
   const progresoRelleno = obtener("progresoRelleno");
-  const contenedor = obtener("exerciseGrid");
-
-  if (
-    !modal || !cerrarModal || !cerrarResultado || !formulario ||
-    !entrada || !tituloModal || !preguntaModal || !enunciadoModal ||
-    !resultado || !botonReintentar || !textoProgreso ||
-    !textoPuntuacion || !barraProgreso || !progresoRelleno ||
-    !contenedor
-  ) {
-    console.error("ALGEON: falta algún elemento necesario en el HTML.");
-    return;
-  }
 
   let lista = [];
   let siguiente = 0;
@@ -76,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let tarjetaPendiente = null;
   const completados = new Set();
 
-  // Mezcla los 30 ejercicios sin clasificarlos por nivel.
+  // Mezcla todos los ejercicios sin agruparlos por nivel.
   function mezclarEjercicios() {
     const copia = [...EJERCICIOS_ALGEON];
 
@@ -88,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return copia;
   }
 
-  // Crea una tarjeta sin etiquetas de nivel.
+  // Tarjeta sin etiquetas de nivel.
   function crearTarjeta(ejercicio, indice) {
     const tarjeta = document.createElement("article");
     tarjeta.className = "exercise-card";
@@ -111,10 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
     tarjeta.querySelector(".equation").textContent = ejercicio.ecuacion;
 
     const boton = tarjeta.querySelector(".btn-resolver");
-
     boton.dataset.pregunta = `Desafío ${indice + 1}`;
-    boton.dataset.enunciado =
-      `Resuelve: ${ejercicio.ecuacion}. ¿Cuánto vale x?`;
+    boton.dataset.enunciado = `Resuelve: ${ejercicio.ecuacion}. ¿Cuánto vale x?`;
     boton.dataset.respuesta = String(ejercicio.respuesta);
     boton.dataset.pista = ejercicio.pista;
 
@@ -123,7 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return tarjeta;
   }
 
-  // Mantiene un máximo de 6 tarjetas visibles al inicio.
   function cargarIniciales() {
     contenedor.innerHTML = "";
     siguiente = 0;
@@ -138,21 +132,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const cantidad = completados.size;
     const porcentaje = Math.round((cantidad / total) * 100);
 
-    textoProgreso.textContent = `${porcentaje}%`;
-    textoPuntuacion.textContent =
-      `Has completado ${cantidad} de ${total} ejercicios.`;
+    if (textoProgreso) textoProgreso.textContent = `${porcentaje}%`;
 
-    progresoRelleno.style.width = `${porcentaje}%`;
-    barraProgreso.setAttribute("aria-valuemax", total);
-    barraProgreso.setAttribute("aria-valuenow", cantidad);
+    if (textoPuntuacion) {
+      textoPuntuacion.textContent =
+        `Has completado ${cantidad} de ${total} ejercicios.`;
+    }
+
+    if (progresoRelleno) {
+      progresoRelleno.style.width = `${porcentaje}%`;
+    }
+
+    if (barraProgreso) {
+      barraProgreso.setAttribute("aria-valuemax", total);
+      barraProgreso.setAttribute("aria-valuenow", cantidad);
+    }
   }
 
-  // Al resolver uno, lo retira y agrega el siguiente.
   function avanzarTarjeta() {
     if (!tarjetaPendiente) return;
 
     const tarjeta = tarjetaPendiente.closest(".exercise-card");
-
     if (tarjeta) tarjeta.remove();
 
     tarjetaPendiente = null;
@@ -174,8 +174,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function abrirEjercicio(boton) {
-    actual = boton;
+    if (
+      !modal || !formulario || !entrada || !tituloModal ||
+      !preguntaModal || !enunciadoModal || !resultado
+    ) {
+      console.error("ALGEON: faltan elementos del modal en index.html.");
+      return;
+    }
 
+    actual = boton;
     preguntaModal.textContent = boton.dataset.pregunta;
     tituloModal.textContent = "Resuelve la ecuación.";
     enunciadoModal.textContent = boton.dataset.enunciado;
@@ -186,17 +193,19 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.className = "answer-feedback";
 
     formulario.hidden = false;
-    botonReintentar.hidden = true;
-    cerrarResultado.textContent = "Cerrar";
+    if (botonReintentar) botonReintentar.hidden = true;
+    if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
 
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
-    setTimeout(() => entrada.focus(), 100);
+    entrada.focus();
   }
 
   function cerrarVentana() {
+    if (!modal) return;
+
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
@@ -206,112 +215,108 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function mostrarResultado(mensaje, tipo) {
+    if (!resultado) return;
+
     resultado.textContent = mensaje;
     resultado.className = `answer-feedback visible ${tipo}`;
   }
 
-  formulario.addEventListener("submit", evento => {
-    evento.preventDefault();
+  if (formulario && entrada) {
+    formulario.addEventListener("submit", evento => {
+      evento.preventDefault();
+      if (!actual) return;
 
-    if (!actual) return;
+      const texto = entrada.value.trim();
+      const respuestaUsuario = Number(texto);
+      const correcta = Number(actual.dataset.respuesta);
 
-    const texto = entrada.value.trim();
-    const respuestaUsuario = Number(texto);
-    const correcta = Number(actual.dataset.respuesta);
+      if (texto === "" || !Number.isFinite(respuestaUsuario)) {
+        mostrarResultado("Escribe una respuesta válida antes de comprobar.", "incorrect");
+        return;
+      }
 
-    if (texto === "" || !Number.isFinite(respuestaUsuario)) {
-      mostrarResultado(
-        "Escribe una respuesta válida antes de comprobar.",
-        "incorrect"
-      );
-      return;
-    }
+      if (Math.abs(respuestaUsuario - correcta) < 0.000001) {
+        completados.add(actual);
+        tarjetaPendiente = actual;
 
-    if (Math.abs(respuestaUsuario - correcta) < 0.000001) {
-      completados.add(actual);
-      tarjetaPendiente = actual;
+        mostrarResultado("¡Correcto! 🎉 Has resuelto la ecuación.", "correct");
 
-      mostrarResultado(
-        "¡Correcto! 🎉 Has resuelto la ecuación. Tu progreso se ha actualizado.",
-        "correct"
-      );
+        entrada.disabled = true;
+        formulario.hidden = true;
+        if (botonReintentar) botonReintentar.hidden = true;
+        if (cerrarResultado) cerrarResultado.textContent = "¡Continuar!";
 
-      entrada.disabled = true;
-      formulario.hidden = true;
+        actual.disabled = true;
+        actual.textContent = "Completado ✓";
+        actual.classList.add("completado");
+
+        actualizarProgreso();
+      } else {
+        mostrarResultado(`Todavía no es correcto. 💡 Pista: ${actual.dataset.pista}`, "incorrect");
+        if (botonReintentar) botonReintentar.hidden = false;
+        if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
+      }
+    });
+  }
+
+  if (botonReintentar && entrada) {
+    botonReintentar.addEventListener("click", () => {
+      entrada.value = "";
+      entrada.disabled = false;
+      if (resultado) {
+        resultado.textContent = "";
+        resultado.className = "answer-feedback";
+      }
       botonReintentar.hidden = true;
-      cerrarResultado.textContent = "¡Continuar!";
+      entrada.focus();
+    });
+  }
 
-      actual.disabled = true;
-      actual.textContent = "Completado ✓";
-      actual.classList.add("completado");
+  if (cerrarModal) cerrarModal.addEventListener("click", cerrarVentana);
+  if (cerrarResultado) cerrarResultado.addEventListener("click", cerrarVentana);
 
-      actualizarProgreso();
-    } else {
-      mostrarResultado(
-        `Todavía no es correcto. 💡 Pista: ${actual.dataset.pista}`,
-        "incorrect"
-      );
-
-      botonReintentar.hidden = false;
-      cerrarResultado.textContent = "Cerrar";
-    }
-  });
-
-  botonReintentar.addEventListener("click", () => {
-    entrada.value = "";
-    entrada.disabled = false;
-    resultado.textContent = "";
-    resultado.className = "answer-feedback";
-    botonReintentar.hidden = true;
-    entrada.focus();
-  });
-
-  cerrarModal.addEventListener("click", cerrarVentana);
-  cerrarResultado.addEventListener("click", cerrarVentana);
-
-  modal.addEventListener("click", evento => {
-    if (evento.target === modal) cerrarVentana();
-  });
+  if (modal) {
+    modal.addEventListener("click", evento => {
+      if (evento.target === modal) cerrarVentana();
+    });
+  }
 
   document.addEventListener("keydown", evento => {
-    if (evento.key === "Escape" && modal.classList.contains("active")) {
+    if (evento.key === "Escape" && modal && modal.classList.contains("active")) {
       cerrarVentana();
     }
   });
 
-  // Reinicia el progreso y crea un orden aleatorio nuevo.
+  // Función global utilizada por el botón Reiniciar del HTML.
   window.reiniciarALGEON = function () {
-    const confirmar = confirm(
-      "¿Reiniciar ALGEON? Tu progreso volverá a cero y los 30 ejercicios cambiarán de orden."
-    );
+    if (!confirm("¿Reiniciar ALGEON? Tu progreso volverá a cero y los ejercicios cambiarán de orden.")) {
+      return;
+    }
 
-    if (!confirmar) return;
+    if (modal) {
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+    }
 
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-
     actual = null;
     tarjetaPendiente = null;
     completados.clear();
 
     lista = mezclarEjercicios();
-
     cargarIniciales();
     actualizarProgreso();
 
-    obtener("ejercicios").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    const seccion = obtener("ejercicios");
+    if (seccion) {
+      seccion.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
-  // Cada sesión comienza con los ejercicios en orden aleatorio.
+  // Cargar los primeros seis ejercicios al abrir la página.
   lista = mezclarEjercicios();
   cargarIniciales();
   actualizarProgreso();
 
-  console.log(
-    "ALGEON listo: 30 ejercicios mezclados, 6 visibles y reinicio aleatorio."
-  );
+  console.log("ALGEON listo: 30 ejercicios mezclados y 6 visibles.");
 });
