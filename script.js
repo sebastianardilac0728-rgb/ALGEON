@@ -1,3 +1,4 @@
+```javascript
 /* =========================================
    ALGEON — 30 EJERCICIOS
    6 VISIBLES + ORDEN ALEATORIO + REINICIAR
@@ -146,7 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
     siguiente = 0;
 
     while (siguiente < MAX_VISIBLES && siguiente < total) {
-      contenedor.appendChild(crearTarjeta(lista[siguiente], siguiente));
+      contenedor.appendChild(
+        crearTarjeta(lista[siguiente], siguiente)
+      );
       siguiente++;
     }
   }
@@ -178,12 +181,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!tarjetaPendiente) return;
 
     const tarjeta = tarjetaPendiente.closest(".exercise-card");
-    if (tarjeta) tarjeta.remove();
+
+    if (tarjeta) {
+      tarjeta.remove();
+    }
 
     tarjetaPendiente = null;
 
     if (siguiente < total) {
-      contenedor.appendChild(crearTarjeta(lista[siguiente], siguiente));
+      contenedor.appendChild(
+        crearTarjeta(lista[siguiente], siguiente)
+      );
       siguiente++;
     }
 
@@ -218,8 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.className = "answer-feedback";
 
     formulario.hidden = false;
-    if (botonReintentar) botonReintentar.hidden = true;
-    if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
+
+    if (botonReintentar) {
+      botonReintentar.hidden = true;
+    }
+
+    if (cerrarResultado) {
+      cerrarResultado.textContent = "Cerrar";
+    }
 
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
@@ -245,9 +259,11 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.className = `answer-feedback visible ${tipo}`;
   }
 
+  // COMPROBAR RESPUESTAS
   if (formulario && entrada) {
     formulario.addEventListener("submit", evento => {
       evento.preventDefault();
+
       if (!actual) return;
 
       const texto = entrada.value.trim();
@@ -276,8 +292,13 @@ document.addEventListener("DOMContentLoaded", () => {
         entrada.disabled = true;
         formulario.hidden = true;
 
-        if (botonReintentar) botonReintentar.hidden = true;
-        if (cerrarResultado) cerrarResultado.textContent = "¡Continuar!";
+        if (botonReintentar) {
+          botonReintentar.hidden = true;
+        }
+
+        if (cerrarResultado) {
+          cerrarResultado.textContent = "¡Continuar!";
+        }
 
         actual.disabled = true;
         actual.textContent = "Completado ✓";
@@ -292,12 +313,18 @@ document.addEventListener("DOMContentLoaded", () => {
           "incorrect"
         );
 
-        if (botonReintentar) botonReintentar.hidden = false;
-        if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
+        if (botonReintentar) {
+          botonReintentar.hidden = false;
+        }
+
+        if (cerrarResultado) {
+          cerrarResultado.textContent = "Cerrar";
+        }
       }
     });
   }
 
+  // VOLVER A INTENTAR
   if (botonReintentar && entrada) {
     botonReintentar.addEventListener("click", () => {
       entrada.value = "";
@@ -313,6 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // CERRAR MODAL
   if (cerrarModal) {
     cerrarModal.addEventListener("click", cerrarVentana);
   }
@@ -323,7 +351,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modal) {
     modal.addEventListener("click", evento => {
-      if (evento.target === modal) cerrarVentana();
+      if (evento.target === modal) {
+        cerrarVentana();
+      }
     });
   }
 
@@ -337,58 +367,80 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // REINICIAR: BORRAR XP Y RESTABLECER EL PROGRESO
+  // REINICIAR XP, PROGRESO Y ORDEN
   window.reiniciarALGEON = function () {
-    if (!confirm(
+    const confirmar = confirm(
       "¿Reiniciar ALGEON? Se borrarán tus XP y tu progreso."
-    )) {
-      return;
-    }
+    );
 
-    // Reiniciar XP guardados.
+    if (!confirmar) return;
+
+    // Reiniciar los XP guardados.
     puntajeXP = 0;
     localStorage.setItem("algeonXP", "0");
     actualizarXP();
 
-    // Cerrar el modal.
+    // Cerrar y limpiar el modal.
     if (modal) {
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
     }
 
     document.body.style.overflow = "";
+
     actual = null;
     tarjetaPendiente = null;
 
-    if (formulario) formulario.reset();
-    if (entrada) entrada.disabled = false;
+    if (formulario) {
+      formulario.reset();
+      formulario.hidden = false;
+    }
+
+    if (entrada) {
+      entrada.value = "";
+      entrada.disabled = false;
+    }
+
     if (resultado) {
       resultado.textContent = "";
       resultado.className = "answer-feedback";
     }
-    if (botonReintentar) botonReintentar.hidden = true;
-    if (cerrarResultado) cerrarResultado.textContent = "Cerrar";
 
-    // Reiniciar progreso y orden.
+    if (botonReintentar) {
+      botonReintentar.hidden = true;
+    }
+
+    if (cerrarResultado) {
+      cerrarResultado.textContent = "Cerrar";
+    }
+
+    // Reiniciar ejercicios y progreso.
     completados.clear();
     lista = mezclarEjercicios();
+
     cargarIniciales();
     actualizarProgreso();
 
-    // Volver a la sección de ejercicios.
+    // Regresar a la sección de ejercicios.
     const seccion = obtener("ejercicios");
+
     if (seccion) {
       seccion.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
     }
+
+    console.log("ALGEON reiniciado correctamente. XP: 0");
   };
 
-  // CARGAR LOS PRIMEROS SEIS EJERCICIOS.
+  // INICIAR LOS PRIMEROS SEIS EJERCICIOS
   lista = mezclarEjercicios();
   cargarIniciales();
   actualizarProgreso();
 
-  console.log("ALGEON listo: 30 ejercicios, 6 visibles y sistema XP activo.");
+  console.log(
+    "ALGEON listo: 30 ejercicios, 6 visibles y sistema XP activo."
+  );
 });
+```
