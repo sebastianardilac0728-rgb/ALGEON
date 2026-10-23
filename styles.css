@@ -966,3 +966,90 @@ input:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* REPRODUCTOR MUSICAL ALGEON */
+.algeon-player {
+  position: fixed;
+  bottom: 84px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 15px;
+  border: 1px solid #22d3ee;
+  border-radius: 16px;
+  background: rgba(10, 13, 29, 0.96);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.18);
+  font-family: Arial, sans-serif;
+}
+
+.music-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-icon {
+  font-size: 30px;
+  color: #22d3ee;
+}
+
+.music-info strong,
+.music-info small {
+  display: block;
+}
+
+.music-info strong {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.music-info small {
+  margin-top: 4px;
+  color: #b9c5e8;
+  font-size: 11px;
+}
+
+.music-button {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #22d3ee;
+  color: #08090d;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#volumenMusica {
+  width: 75px;
+  accent-color: #22d3ee;
+}
+
+#estadoMusica {
+  color: #b9c5e8;
+  font-size: 11px;
+}
+
+@media (max-width: 480px) {
+  .algeon-player {
+    right: 8px;
+    bottom: 76px;
+    gap: 8px;
+    padding: 9px;
+  }
+
+  .music-info small,
+  #estadoMusica {
+    display: none;
+  }
+
+  #volumenMusica {
+    width: 48px;
+  }
+}
+
