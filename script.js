@@ -1,9 +1,3 @@
-```javascript
-/* =========================================
-   ALGEON — 30 EJERCICIOS
-   6 VISIBLES + ORDEN ALEATORIO + REINICIAR
-   SISTEMA XP PERSISTENTE
-   ========================================= */
 
 const EJERCICIOS_ALGEON = [
   { titulo: "Ecuación básica", ecuacion: "3x + 6 = 21", respuesta: 5, pista: "Resta 6 a ambos lados y divide entre 3." },
@@ -76,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // ELEMENTOS DEL MODAL
   const modal = obtener("modalEjercicio");
   const cerrarModal = obtener("cerrarModal");
   const cerrarResultado = obtener("cerrarResultado");
@@ -259,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resultado.className = `answer-feedback visible ${tipo}`;
   }
 
-  // COMPROBAR RESPUESTAS
   if (formulario && entrada) {
     formulario.addEventListener("submit", evento => {
       evento.preventDefault();
@@ -324,7 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // VOLVER A INTENTAR
   if (botonReintentar && entrada) {
     botonReintentar.addEventListener("click", () => {
       entrada.value = "";
@@ -340,7 +331,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // CERRAR MODAL
   if (cerrarModal) {
     cerrarModal.addEventListener("click", cerrarVentana);
   }
@@ -380,7 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("algeonXP", "0");
     actualizarXP();
 
-    // Cerrar y limpiar el modal.
     if (modal) {
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
@@ -413,15 +402,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cerrarResultado) {
       cerrarResultado.textContent = "Cerrar";
     }
-
-    // Reiniciar ejercicios y progreso.
+     
     completados.clear();
     lista = mezclarEjercicios();
 
     cargarIniciales();
     actualizarProgreso();
 
-    // Regresar a la sección de ejercicios.
     const seccion = obtener("ejercicios");
 
     if (seccion) {
@@ -434,7 +421,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("ALGEON reiniciado correctamente. XP: 0");
   };
 
-  // INICIAR LOS PRIMEROS SEIS EJERCICIOS
   lista = mezclarEjercicios();
   cargarIniciales();
   actualizarProgreso();
@@ -443,4 +429,4 @@ document.addEventListener("DOMContentLoaded", () => {
     "ALGEON listo: 30 ejercicios, 6 visibles y sistema XP activo."
   );
 });
-```
+
